@@ -6,14 +6,14 @@ import psutil
 import logging
 
 
-def pip_install(pkg: str, pybindir: str = ""):
+def pip_install(pkg: str, pipbin: str = ""):
     all_pkgs = [_.decode('ascii').lower() for _ in subprocess.check_output(
-        [f"{pybindir}pip3", 'list']).split()]
+        [f"{pipbin}", 'list']).split()]
     if pkg in all_pkgs:
         logging.info(f"pkg= , {pkg},  is present")
         return "already present"
     else:
-        os.system(f"{pybindir}pip3 install {pkg}")
+        os.system(f"{pipbin} install {pkg}")
         return "installed"
 
 

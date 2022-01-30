@@ -22,8 +22,14 @@ def add_to_env(varname, path):
 def build_env():
     with open(env_fp, "rb") as fh:
         envvars = pickle.load(fh)
-    env_str = "\n".join(
-        [f"""export {key}={":".join(envvars[key])}:${key}""" for key in envvars.keys()])
+    # env_str = "\n".join(
+    #     [f"""export {key}={":".join(envvars[key])}:${key}""" for key in envvars.keys()])
+    env_str = ""
+    for key in envvars.keys():
+        suffix = ""
+        if key in ["PATH", "LD_LIBRARY_PATH"]:
+            suffix = f"${key}:"
+        env_str = f"""{env_str}\nexport {key}={":".join(envvars[key])}{suffix}"""
     return env_str
 
 

@@ -1,0 +1,25 @@
+From 28ba92e137c3a3d6f2142a19e06a7247ab45c76f Mon Sep 17 00:00:00 2001
+From: San <you@example.com>
+Date: Sat, 29 Jan 2022 16:20:45 +0000
+Subject: [PATCH] final
+
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 6bc6f04..ab193a4 100644
+--- a/Makefile
++++ b/Makefile
+@@ -21,7 +21,7 @@ CONFIGURE_STYLE=	simple
+ CONFIGURE_SCRIPT=	config
+ CONFIGURE_ARGS+=	--prefix=${PREFIX} \
+ 			--openssldir=${PREFIX}/share/eopenssl11 \
+-			no-threads no-rc5 no-ssl3 \
++			no-rc5 no-ssl3 \
+ 			no-devcryptoeng \
+ 			shared
+ 
+-- 
+2.31.1
+

@@ -5,7 +5,7 @@ from manage_env import build_env, add_to_env
 from deployConfig import workDir, logDir, scriptsDir
 
 
-def exec_script(targetNode, scriptFn, dependsFiles=[], user="adming", execDir="/tmp", manageEnv=True, dependsPkgs=[], dependsPips=[], logOutput=None):
+def exec_script(targetNode, scriptFn, dependsFiles=[], user="adming", execDir="/tmp", manageEnv=True, dependsPkgs=[],  logOutput=None):
     """
     copy the script to remote and run it
     """
@@ -14,6 +14,7 @@ def exec_script(targetNode, scriptFn, dependsFiles=[], user="adming", execDir="/
         """
         cmdargl: clush command argument as a list
         """
+        print("cmd = ", cmdargl)
         res = subprocess.check_output(
             ["clush", "-l", user, "-w", targetNode,  *cmdargl])
         # in case you don't like the output
@@ -43,7 +44,9 @@ def exec_script(targetNode, scriptFn, dependsFiles=[], user="adming", execDir="/
         doas = "doas"
         if user == "root":
             doas = ""
-        exec_clush_cmd(f"""{doas} pkg_add {" ".join(dependsPkgs)}""".split())
+        res = exec_clush_cmd(
+            f"""{doas} pkg_add {" ".join(dependsPkgs)}""".split())
+
     dependsFiles = [*dependsFiles, "execUtils.py"]
 
     depends_clean_cmd = ""
@@ -78,8 +81,8 @@ def exec_script(targetNode, scriptFn, dependsFiles=[], user="adming", execDir="/
     print(depends_clean_cmd)
     depends_clean_cmd = ""
     res = exec_clush_cmd(f"""
-                         cd {execDir} &&
-                         python3 /tmp/{scriptFn}  {depends_clean_cmd}""".split())
+                         cd {execDir} && 
+{load_env}  python3 /tmp/{scriptFn}  {depends_clean_cmd}""".split())
     if manageEnv:
         os.remove("/tmp/env.sh")
     if logOutput:

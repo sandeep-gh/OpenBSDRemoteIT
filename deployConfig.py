@@ -7,3 +7,5 @@ if 'logDir' in os.environ:
     logDir = os.environ['logDir']
 else:
     logDir = f"{workDir}/logs"
+
+install_basedir = "/home/shared"
