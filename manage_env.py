@@ -28,7 +28,7 @@ def build_env():
     for key in envvars.keys():
         suffix = ""
         if key in ["PATH", "LD_LIBRARY_PATH"]:
-            suffix = f"${key}:"
+            suffix = f":${key}:"
         env_str = f"""{env_str}\nexport {key}={":".join(envvars[key])}{suffix}"""
     return env_str
 

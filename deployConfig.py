@@ -9,3 +9,5 @@ else:
     logDir = f"{workDir}/logs"
 
 install_basedir = "/home/shared"
+
+maintainer_email = "kabira@monallabs.in"

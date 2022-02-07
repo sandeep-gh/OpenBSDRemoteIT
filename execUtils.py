@@ -6,7 +6,7 @@ import psutil
 import logging
 
 
-def pip_install(pkg: str, pipbin: str = ""):
+def pip_install(pkg: str, pipbin: str = "pip3.10"):
     all_pkgs = [_.decode('ascii').lower() for _ in subprocess.check_output(
         [f"{pipbin}", 'list']).split()]
     if pkg in all_pkgs:
@@ -24,7 +24,7 @@ class Error:
 error = Error()
 
 
-def exec_cmd(cmdl: List[str], errcheck: str):
+def exec_cmd(cmdl: List[str], errcheck: str = ""):
     """
 
     """

@@ -4,7 +4,7 @@ import time
 import subprocess
 import wget
 import logging
-
+from execUtils import exec_cmd, pip_install
 logging.basicConfig(filename="install_python.log", level=logging.INFO)
 
 CXX = "/usr/bin/c++"
@@ -41,8 +41,12 @@ def install():
             os.system(build_cmd)
             os.chdir(f"{install_basedir}/Builds/{name}-{version}/bin")
             os.system("ln -s python3.10 python3")
+            pip_install(
+                "psutil", f"{install_basedir}/Builds/Python-{version}/bin/pip{version}")
+
         else:
             logging.info("will not build-- python3.10 already present")
+
     except Exception as e:
         logging.info("unable to install..cleaning up")
         os.chdir(f"{install_basedir}")
